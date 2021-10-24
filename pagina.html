@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celcius a Fahrenheits</title>
+</head>
+<body>
+    <div id="father">
+        <form action="POST">
+            <input type="number" id="valu" placeholder="Posible peticion: 50.20">
+            <input type="submit" id="botn" value="Calcular">
+        </form>
+        
+        <span id="resultado">Predicción: *****</span>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(e => {
+            let valu = $('#valu')[0],
+                botn = $('#botn')[0];
+    
+            botn.onclick = e => {
+                e.preventDefault();
+                console.log(valu.value);
+                calc(valu.value);
+            };
+            valu.onsubmit = e => {
+                e.preventDefault();
+                console.log(valu.value);
+                calc(valu.value);
+            };
+            let calc = x => {
+                $.post("http://localhost:3006", x, response => {
+                    $(resultado).text('Predicción: ' + response);
+                });
+            }
+        })
+    </script>
+</body>
+</html>
